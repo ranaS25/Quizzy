@@ -1,7 +1,11 @@
 {
   "name": "quizzy",
   "version": "1.0.0",
-  "description": "Quiz Web Application made with heart",
+  "description": "Quiz Web Application made with ❤️",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ranaS25/Quizzy.git"
+  },
   "scripts": {
     "test": "jest",
     "start": "parcel src/index.html"
