@@ -4,12 +4,11 @@ const quizSlice = createSlice({
   name: "quiz",
   initialState: {
     isLoading: false,
-    questions: null, //[1:{what is this, options: ["ds", "Ddf", "Ddfd", "Dfdf"]}, 2:{}]
-    currentQuestionIndex: -1,
-    answers: [], //[823, 324, 323]
-    score: null,
+    questions: null, 
+    currentQuestionIndex: 0,
+    answers: [], 
+    score: 0,
     isQuizOver: null,
-    error: null,
   },
   reducers: {
     setIsLoading: (state, action) => {
@@ -41,11 +40,10 @@ const quizSlice = createSlice({
     resetQuiz: (state) => {
       
       state.questions = null;
-      state.currentQuestionIndex = -1;
+      state.currentQuestionIndex = 0;
       state.answers = [];
-      state.score = null;
+      state.score = 0;
       state.isQuizOver = null;
-      state.error = null;
       
     }
     

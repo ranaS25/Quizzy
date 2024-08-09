@@ -8,15 +8,18 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
+    "he": "^1.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-redux": "^9.1.2"
+    "react-redux": "^9.1.2",
+    "react-select": "^5.8.0"
   },
   "devDependencies": {
     "parcel": "^2.12.0",

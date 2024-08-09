@@ -11,13 +11,19 @@ const App = () => {
   const questions = useSelector(store => store.quiz.questions)
   const isQuizOver = useSelector(store => store.quiz.isQuizOver);
 
-  console.log(isQuizOver);
+
   return (
-    <div className="min-h-dvh h-screen flex flex-col">
+    <div className="min-h-dvh h-fit flex flex-col dark:bg-slate-800 dark:text-white/90">
       <Header />
       {!questions && <QuizStarter />}
-      {isQuizOver===false && <Quiz questions={questions} />}
-      {isQuizOver  && <QuizResult/>}
+      {questions && isQuizOver === false && <Quiz questions={questions} /> }
+      {questions && isQuizOver && <QuizResult totalQuestions={questions.length} />}
+      
+
+      
+
+      
+    
     </div>
   );
 };
