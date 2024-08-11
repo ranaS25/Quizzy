@@ -1,49 +1,36 @@
-import React, { useState } from 'react'
-import { API_URL, categoryOptions, getApiUrl, Starter } from '../utils/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { addQuestions, setIsLoading } from '../redux/slices/quizSlice';
+import React from "react";
+import {
+  categoryOptions,
+  Starter,
+  difficultyOptions,
+  categoryOptions,
+} from "../utils/constants";
+
+import { customStyles } from "../utils/customStyles";
+
+import { getApiUrl, modifyResponseArray } from "../utils/functions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addQuestions,
+  setCategory,
+  setDifficulty,
+  setIsLoading,
+} from "../redux/slices/quizSlice";
 import Select from "react-select";
 
-
-
-const difficultyOptions = [
-  { value: "easy", label: "Easy" },
-  { value: "medium", label: "Meduim" },
-  { value: "hard", label: "Hard" },
-];
-
-
-const customStyles = {
-  control: (provided) => ({
-    ...provided, 
-    width: "fit-content",
-    minWidth: "120px",
-
-    padding:"8px"
-
-  }),
-
-
-}
-
-
-
 const QuizStarter = () => {
-
   const isQuizLoading = useSelector((store) => store.quiz.isLoading);
-  const [difficulty, setDifficulty] = useState("");
-  const [category, setCategory] = useState("any");
 
-
-
+  const category = useSelector((store) => store.quiz.category);
+  const difficulty = useSelector((store) => store.quiz.difficulty);
 
   const dispatch = useDispatch();
 
   const handleStartClick = async () => {
     dispatch(setIsLoading(true));
-
+    console.log(getApiUrl(category, difficulty));
     try {
-      const response = await fetch(getApiUrl(category,difficulty ));
+      const response = await fetch(getApiUrl(category, difficulty));
       const data = await response.json();
 
       if (data.response_code !== 0) {
@@ -51,28 +38,15 @@ const QuizStarter = () => {
         return;
       }
 
-      const arr = [];
+      const modifiedArr = modifyResponseArray(data.results);
 
-      data.results.forEach((question) => {
-        const obj = {
-          question: question.question,
-          all_answers: [
-            ...question.incorrect_answers,
-            question.correct_answer,
-          ].sort(() => Math.random() - 0.5),
-          correct_answer: question.correct_answer,
-        };
-        arr.push(obj);
-      });
-
-      dispatch(addQuestions(arr));
+      dispatch(addQuestions(modifiedArr));
 
       dispatch(setIsLoading(false));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-
 
   return (
     <div className="w-full  h-full flex-grow box-border bg-green-100 dark:bg-slate-950 dark:text-white flex flex-col justify-center items-center  md:p-5 ">
@@ -83,22 +57,24 @@ const QuizStarter = () => {
         {Starter.DESCRIPTION_MESSAGE}
       </p>
 
-    
       <div className="flex gap-4 py-4">
-        
-        <Select options={categoryOptions}
+        <Select
+          options={categoryOptions}
           styles={customStyles}
-          placeholder={ "Categories"}
+          placeholder={"Category"}
           onChange={(option) => {
-          setCategory(option?.value)
-        }} />
+            dispatch(setCategory(option?.value));
+          }}
+        />
 
-
-        <Select options={difficultyOptions} styles={customStyles}
+        <Select
+          options={difficultyOptions}
+          styles={customStyles}
           placeholder={"Difficulty"}
           onChange={(option) => {
-          setDifficulty(option?.value)
-        }} />
+            dispatch(setDifficulty(option?.value));
+          }}
+        />
       </div>
 
       <button
@@ -109,6 +85,6 @@ const QuizStarter = () => {
       </button>
     </div>
   );
-}
+};
 
-export default QuizStarter
+export default QuizStarter;

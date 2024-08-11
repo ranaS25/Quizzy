@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { submitAnswer } from "../redux/slices/quizSlice";
-import { decodeHtmlEntities } from "../utils/constants";
+import { decodeHtmlEntities } from "../utils/functions";
 
 
 const Question = ({ question, all_answers, correct_answer }) => {

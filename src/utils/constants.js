@@ -8,24 +8,6 @@ export const API_URL =
   "https://opentdb.com/api.php?amount=10";
 
 
-export const getApiUrl = (category, difficulty) => {
-  const difficultysString = difficulty != "" ? "&difficulty=" + difficulty : "";
-
-  return (
-    API_URL + "&category"+ category  + difficultysString
-  );
-  
-}
-export const decodeHtmlEntities = (text) =>{
-  var textArea = document.createElement("textarea");
-  textArea.innerHTML = text;
-  return textArea.value;
-
-  return "hellow"
-}
-
-
-
 export const categoryOptions = [
   { value: "any", label: "Any Category" },
   { value: "9", label: "General Knowledge" },
@@ -52,4 +34,11 @@ export const categoryOptions = [
   { value: "30", label: "Science: Gadgets" },
   { value: "31", label: "Entertainment: Japanese Anime & Manga" },
   { value: "32", label: "Entertainment: Cartoon & Animations" },
+];
+
+
+export const difficultyOptions = [
+  { value: "easy", label: "Easy" },
+  { value: "medium", label: "Meduim" },
+  { value: "hard", label: "Hard" },
 ];

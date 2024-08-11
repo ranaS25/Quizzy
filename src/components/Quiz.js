@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Question from "./Question";
 import { useSelector } from "react-redux";
 
 const Quiz = ({ questions }) => {
-
 
 
   const currentQuestionIndex = useSelector((store) => store.quiz.currentQuestionIndex);
