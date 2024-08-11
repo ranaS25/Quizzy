@@ -17,8 +17,14 @@ const customStyles = {
   control: (provided) => ({
     ...provided, 
     width: "fit-content",
+    minWidth: "120px",
 
-})}
+    padding:"8px"
+
+  }),
+
+
+}
 
 
 
@@ -80,12 +86,16 @@ const QuizStarter = () => {
     
       <div className="flex gap-4 py-4">
         
-        <Select options={categoryOptions} onChange={(option) => {
+        <Select options={categoryOptions}
+          styles={customStyles}
+          placeholder={ "Categories"}
+          onChange={(option) => {
           setCategory(option?.value)
         }} />
 
 
-        <Select options={difficultyOptions} styles={ customStyles}
+        <Select options={difficultyOptions} styles={customStyles}
+          placeholder={"Difficulty"}
           onChange={(option) => {
           setDifficulty(option?.value)
         }} />
